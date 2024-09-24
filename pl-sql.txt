@@ -1,0 +1,95 @@
+create or replace noneditionable package PROJECT_pkg is
+
+ PROCEDURE login_user(
+    p_username  IN VARCHAR2,
+    p_user_data OUT SYS_REFCURSOR
+);
+-------------------------------
+PROCEDURE create_user (
+   p_email               IN VARCHAR2,
+   p_employee_lastname   IN VARCHAR2,
+   p_employee_name       IN VARCHAR2,
+   p_organizationAddress IN VARCHAR2,
+   p_org_name            IN VARCHAR2,
+   p_password            IN VARCHAR2,
+   p_telephone           IN VARCHAR2, 
+   p_role                IN VARCHAR2,
+   p_person_id           IN NUMBER
+);
+  -------------------------------------
+PROCEDURE UPDATE_USER_BY_PERSON_ID(
+    p_person_id        IN NUMBER,
+    p_employee_name    IN VARCHAR2,
+    p_employee_surname IN VARCHAR2,
+    p_role             IN VARCHAR2,
+    p_telephone        IN NUMBER, -- Ensure this is NUMBER to accept decimal values
+    p_org_name         IN VARCHAR2,
+    p_password         IN VARCHAR2 
+);
+  ---------------------------------
+  PROCEDURE delete_user(p_person_id IN NUMBER);
+  -------------------------------------
+
+  -----------------------------------------
+  
+  ----------------------------------------------
+  PROCEDURE Register_Organization(
+    p_org_name   IN VARCHAR2,
+    p_address    IN VARCHAR2,
+    p_email      IN VARCHAR2,
+    p_telephone  IN VARCHAR2
+);
+------------------------------------------------------
+
+ PROCEDURE Org_Login(
+    p_username  IN  VARCHAR2,
+    p_password  IN  VARCHAR2,
+    p_org_cursor OUT SYS_REFCURSOR,
+    p_employee_cursor OUT SYS_REFCURSOR
+);
+-----------------------------------------------------------------
+PROCEDURE Remove_Product (
+    p_user_id      NUMBER,
+    p_barcode      VARCHAR2,
+    p_quantity     NUMBER
+);
+--------------------------------------------------------------------
+PROCEDURE GET_ALL_PROJECT_USERS (p_cursor OUT SYS_REFCURSOR);
+
+-----------------------------------------------------------------
+PROCEDURE ADD_PRODUCT_TO_WAREHOUSE (
+    p_product_name IN VARCHAR2,
+    p_quantity     IN NUMBER,
+    p_barcode      IN VARCHAR2,
+    p_user_id      IN NUMBER
+);
+---------------------------------------------
+PROCEDURE EDIT_PRODUCT_IN_WAREHOUSE (
+    p_product_id   IN NUMBER,
+    p_product_name IN VARCHAR2,
+    p_quantity     IN NUMBER,
+    p_barcode      IN VARCHAR2,
+    p_user_id      IN NUMBER
+);
+-----------------------------------------------
+PROCEDURE FetchAllProducts (
+    p_result_set OUT SYS_REFCURSOR
+);
+--------------------------------------------------
+PROCEDURE Get_Barcodes(ref_cursor OUT SYS_REFCURSOR);
+----------------------------------------------------
+PROCEDURE FetchProductsByUserId (
+
+    p_user_id    IN NUMBER,
+    p_result_set OUT SYS_REFCURSOR
+);
+---------------------------------------------------
+PROCEDURE GetTakenProducts (p_cursor OUT SYS_REFCURSOR);
+---------------------------------------------------------
+PROCEDURE UPDATE_USER_STATUS(p_user_id IN NUMBER, p_is_active IN NUMBER);
+---------------------------------------------------------------
+PROCEDURE get_org_names(
+    p_refcursor OUT SYS_REFCURSOR
+);
+-------------------------
+end PROJECT_pkg;
